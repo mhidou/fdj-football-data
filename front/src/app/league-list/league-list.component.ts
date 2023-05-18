@@ -10,7 +10,7 @@ import { FootballDataService } from '../football-data.service';
       <input type="text" placeholder="Search a league" (keyup)="filterLeagues($event)" />
       <ul>
         <li *ngFor="let league of filteredLeagues">
-          <a [routerLink]="['/teams', league.idLeague]">
+          <a class="league-link" [routerLink]="['/teams', league.idLeague]">
             {{league.strLeague}}
           </a>
         </li>
