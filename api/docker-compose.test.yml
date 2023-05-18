@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:latest
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      # - MONGO_INITDB_DATABASE=football
+    ports:
+      - 27017:27017
+    # volumes:
+    #   - ./mongo-init-scripts/:/docker-entrypoint-initdb.d
+    #   - ./mongo-init-scripts/init.sh:/docker-entrypoint-initdb.d/init.sh
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.e2e
+    volumes:
+      - ./api:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    command: npm run start:dev
+    environment:
+      - APP_PORT=3000
+      - MONGODB_URL=mongodb://admin:secret@mongodb:27017
+      - MONGODB_DATABASE=football?authSource=admin
+      - LEAGUES_URL=https://www.thesportsdb.com/api/v1/json/3/all_leagues.php
+      - TEAMS_URL=https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php
+    depends_on:
+      - mongodb
+volumes:
+  mongodb_data_container:
