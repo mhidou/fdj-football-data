@@ -10,7 +10,7 @@ export interface Team {
 }
 export interface Player {
   teamId: string;
-  mame: string;
+  name: string;
   poste: string;
   birthDate: string;
   price: string;

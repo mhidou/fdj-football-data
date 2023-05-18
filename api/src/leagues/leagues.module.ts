@@ -87,37 +87,37 @@ export class LeaguesModule {
           this.connection.db.collection('teams').insertOne(teamData);
           this.connection.db.collection('players').insertMany([{
             teamId: team.idTeam,
-            mame: 'Angel Di Maria',
+            name: 'Angel Di Maria',
             poste: 'Midfielder',
             birthDate: '1988-02-14',
             price: '1 000 000 $'
           }, {
             teamId: team.idTeam,
-            mame: 'Phil Foden',
+            name: 'Phil Foden',
             poste: 'Midfielder',
             birthDate: '1988-02-14',
             price: '1 000 000 $'
           }, {
             teamId: team.idTeam,
-            mame: 'Thiago Silva',
+            name: 'Thiago Silva',
             poste: 'Defense',
             birthDate: '1988-02-14',
             price: '1 000 000 $'
           }, {
             teamId: team.idTeam,
-            mame: 'Erling Haaland',
+            name: 'Erling Haaland',
             poste: 'Striker',
             birthDate: '1988-02-14',
             price: '1 000 000 $'
           }, {
             teamId: team.idTeam,
-            mame: 'Kylian Mbappé',
+            name: 'Kylian Mbappé',
             poste: 'Striker',
             birthDate: '1988-02-14',
             price: '1 000 000 $'
           }, {
             teamId: team.idTeam,
-            mame: 'Karim Benzema',
+            name: 'Karim Benzema',
             poste: 'Striker',
             birthDate: '1988-02-14',
             price: '1 000 000 $'

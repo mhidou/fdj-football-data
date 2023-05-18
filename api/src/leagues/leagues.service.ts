@@ -9,7 +9,7 @@ export class LeaguesService {
     @InjectModel(League.name) private readonly leagueModel: Model<LeagueDocument>,
   ) { }
 
-  async findAll() {
+  async findAll(): Promise<LeagueDocument[]> {
     return this.leagueModel.find();
   }
 }

@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
         </div>
 
         <div class="details">
-          <span class="name">{{player.mame}}</span>
+          <span class="name">{{player.name}}</span>
           <span>{{player.poste}}</span>
           <span>{{player.poste}}</span>
           <span>BirthDate: {{player.birthDate}}</span>

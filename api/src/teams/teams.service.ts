@@ -9,11 +9,8 @@ export class TeamsService {
     @InjectModel(Team.name) private readonly teamModel: Model<TeamDocument>,
   ) { }
 
-  findTeamsByLeagueId(leagueId: string): Query<TeamDocument[], TeamDocument, {}, TeamDocument, "find"> {
+  async findTeamsByLeagueId(leagueId: string): Promise<TeamDocument[]> {
     const teams = this.teamModel.find<TeamDocument>({ leagues: leagueId });
-    if (!teams) {
-      throw new NotFoundException(`There is no teams for league ${leagueId}`)
-    }
     return teams
   }
 }

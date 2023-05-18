@@ -12,7 +12,7 @@ export class Player {
 
   @ApiProperty()
   @Prop({ required: true })
-  mame: string;
+  name: string;
 
   @ApiProperty()
   @Prop({ required: true })
