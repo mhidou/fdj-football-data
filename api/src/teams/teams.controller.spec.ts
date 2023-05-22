@@ -39,7 +39,7 @@ describe('TeamsController', () => {
 
       jest.spyOn(teamsService, 'findTeamsByLeagueId').mockResolvedValue(expectedResult as TeamDocument[]);
 
-      const result = await controller.findTeamsByLeagueId(leagueId);
+      const result = await controller.findTeamsByLeagueId({ leagueId });
 
       expect(teamsService.findTeamsByLeagueId).toHaveBeenCalledWith(leagueId);
       expect(result).toEqual(expectedResult);

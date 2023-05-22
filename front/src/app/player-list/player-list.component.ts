@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Player } from '../interfaces';
 import { FootballDataService } from '../football-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-player-list',
@@ -20,6 +21,7 @@ import { ActivatedRoute } from '@angular/router';
           <span>{{player.price}}</span>
         </div>
       </div>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
   `,
   styles: [
@@ -35,13 +37,19 @@ import { ActivatedRoute } from '@angular/router';
 export class PlayerListComponent implements OnInit {
   teamId: string | null = '';
   players: Player[] = [];
+  errorMessage: string = '';
   constructor(
     private footballDataService: FootballDataService,
     private route: ActivatedRoute
   ) { }
   ngOnInit(): void {
     this.teamId = this.route.snapshot.paramMap.get('teamId')
-    this.footballDataService.getPlayersByTeam(this.teamId || '').subscribe(players => {
+    this.footballDataService.getPlayersByTeam(this.teamId || '').pipe(
+      catchError((error: any) => {
+        this.errorMessage = 'An error occurred while fetching leagues. Please try again later.';
+        return throwError(() => error);
+      })
+    ).subscribe(players => {
       this.players = players;
     })
   }

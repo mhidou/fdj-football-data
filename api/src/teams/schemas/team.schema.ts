@@ -6,19 +6,15 @@ export type TeamDocument = Team & Document;
 
 @Schema()
 export class Team {
-  @ApiProperty()
   @Prop({ required: true })
   idTeam: string;
 
-  @ApiProperty()
   @Prop({ required: true })
   strTeam: string;
 
-  @ApiProperty()
   @Prop({ required: true })
   strTeamBadge: string;
 
-  @ApiProperty()
   @Prop({ required: true })
   leagues: string[];
 }

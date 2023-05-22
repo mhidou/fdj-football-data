@@ -4,6 +4,8 @@ import { LeaguesModule } from './leagues/leagues.module';
 import { TeamsModule } from './teams/teams.module';
 import { PlayersModule } from './players/players.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { FeedDataService } from './feed-data/feed-data.service';
+import { HttpModule, HttpService } from '@nestjs/axios';
 
 @Module({
   imports: [
@@ -11,10 +13,11 @@ import { ScheduleModule } from '@nestjs/schedule';
     ScheduleModule.forRoot(),
     LeaguesModule,
     TeamsModule,
-    PlayersModule
+    PlayersModule,
+    HttpModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [FeedDataService],
 })
 export class AppModule {
 

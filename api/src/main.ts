@@ -5,6 +5,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe({
+    forbidNonWhitelisted: true,
+    whitelist: true,
+    transform: true,
+  }));
   app.enableCors();
   const options = new DocumentBuilder()
     .setTitle('Fdj football data api')

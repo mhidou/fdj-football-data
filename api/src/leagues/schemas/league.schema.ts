@@ -6,11 +6,9 @@ export type LeagueDocument = League & Document;
 
 @Schema()
 export class League {
-  @ApiProperty()
   @Prop()
   idLeague: string;
 
-  @ApiProperty()
   @Prop()
   strLeague: string;
 }

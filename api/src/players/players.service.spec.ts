@@ -14,7 +14,7 @@ describe('PlayersService', () => {
         {
           provide: getModelToken(Player.name),
           useValue: {
-            find: jest.fn(),
+            find: jest.fn().mockReturnThis(),
           },
         },
       ],

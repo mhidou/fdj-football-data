@@ -14,7 +14,9 @@ describe('TeamsService', () => {
         TeamsService,
         {
           provide: getModelToken(Team.name),
-          useValue: Model,
+          useValue: {
+            find: jest.fn().mockReturnThis(),
+          },
         },
       ],
     }).compile();

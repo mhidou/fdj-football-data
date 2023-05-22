@@ -35,12 +35,6 @@ services:
     ports:
       - 4200:4200
     command: ng serve --host 0.0.0.0
-    # environment:
-    #   - APP_PORT=3000
-    #   - MONGODB_URL=mongodb://admin:secret@mongodb:27017
-    #   - MONGODB_DATABASE=football?authSource=admin
-    #   - LEAGUES_URL=https://www.thesportsdb.com/api/v1/json/3/all_leagues.php
-    #   - TEAMS_URL=https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php
     depends_on:
       - mongodb
       - api

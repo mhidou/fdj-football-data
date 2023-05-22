@@ -4,13 +4,15 @@ import {
 } from '@nestjs/common';
 import { LeaguesService } from './leagues.service';
 import { League } from './schemas/league.schema';
+import { LeagueDto } from './dto/league.dto/league.dto';
 
 @Controller('leagues')
 export class LeaguesController {
   constructor(private readonly leaguesService: LeaguesService) { }
 
   @Get()
-  findAll(): Promise<League[]> {
-    return this.leaguesService.findAll();
+  async findAll(): Promise<LeagueDto[]> {
+    const leagues = await this.leaguesService.findAll();
+    return leagues;
   }
 }

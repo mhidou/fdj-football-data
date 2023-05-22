@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { throwError, catchError } from 'rxjs';
 import { League } from '../interfaces';
 import { FootballDataService } from '../football-data.service';
 
@@ -15,6 +15,7 @@ import { FootballDataService } from '../football-data.service';
           </a>
         </li>
       </ul>
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
   `,
   styles: [
@@ -25,6 +26,7 @@ import { FootballDataService } from '../football-data.service';
 export class LeagueListComponent implements OnInit {
   leagues: League[] = [];
   filteredLeagues: League[] = [];
+  errorMessage: string = '';
 
   constructor(private footballDataService: FootballDataService) { }
 
@@ -34,7 +36,12 @@ export class LeagueListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.footballDataService.getLeagues().subscribe(leagues => {
+    this.footballDataService.getLeagues().pipe(
+      catchError((error: any) => {
+        this.errorMessage = 'An error occurred while fetching leagues. Please try again later.';
+        return throwError(() => error);
+      })
+    ).subscribe(leagues => {
       this.filteredLeagues = this.leagues = leagues;
     })
   }

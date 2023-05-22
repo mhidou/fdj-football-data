@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestj
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Query } from 'mongoose';
 import { Team, TeamDocument } from './schemas/team.schema';
+import { TeamDto } from './dto/team.dto/team.dto';
 
 @Injectable()
 export class TeamsService {
@@ -9,8 +10,11 @@ export class TeamsService {
     @InjectModel(Team.name) private readonly teamModel: Model<TeamDocument>,
   ) { }
 
-  async findTeamsByLeagueId(leagueId: string): Promise<TeamDocument[]> {
-    const teams = this.teamModel.find<TeamDocument>({ leagues: leagueId });
-    return teams
+  async findTeamsByLeagueId(leagueId: string): Promise<TeamDto[]> {
+    const teams = await this.teamModel.find({ leagues: leagueId });
+    if (teams.length === 0) {
+      throw new NotFoundException(`No teams has been found for league ${leagueId}`)
+    }
+    return teams;
   }
 }
